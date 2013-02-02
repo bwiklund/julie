@@ -89,9 +89,8 @@ functions =
 
 run = (p) ->
   for branch in p.branches
-    console.log branch.branches
     fn = branch.branches[0]
-    console.log "fn", fn.str
+    console.log "fn:", fn.str
     defs[fn.str].call {}, branch.branches[1..].map (b) -> b.str
 
 

@@ -101,9 +101,8 @@ run = function(p) {
   _results = [];
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     branch = _ref[_i];
-    console.log(branch.branches);
     fn = branch.branches[0];
-    console.log("fn", fn.str);
+    console.log("fn:", fn.str);
     _results.push(defs[fn.str].call({}, branch.branches.slice(1).map(function(b) {
       return b.str;
     })));
