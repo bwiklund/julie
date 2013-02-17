@@ -1,30 +1,7 @@
-###
-
-stuff in lisp
-
-
-() nesting
-
-()
-  define
-  foo
-  ()
-    lambda
-    ()
-      x
-    ()
-      +
-      x
-      5
-
-###
-
 src = """
 ( def foo ( x ) ( + x 5 ) )
 ( foo 4 )
 """
-
-
 
 
 
@@ -35,23 +12,6 @@ CLOSE_PAREN = ")"
 parse = (str) ->
 
   toks = src.split /[\s\n]+/
-
-  # tree = new Node("root",null)
-  # current_branch = tree
-
-  # for tok in toks
-  #   switch tok
-  #     when OPEN_PAREN 
-  #       branch = new Node tok, current_branch
-  #       current_branch.branches.push branch
-  #       current_branch = branch
-  #     when CLOSE_PAREN
-  #       current_branch = current_branch.parent
-  #     else
-  #       current_branch.branches.push new Node tok, current_branch
-
-  # debride = (b) -> delete b.parent; debride c for c in b.branches
-  # debride tree
 
   stack = []
   tree = []
@@ -77,6 +37,35 @@ parse = (str) ->
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+###
 
 program = parse src
 
