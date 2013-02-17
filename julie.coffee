@@ -53,7 +53,20 @@ parse = (str) ->
   # debride = (b) -> delete b.parent; debride c for c in b.branches
   # debride tree
 
-  tree = toks
+  stack = []
+  tree = []
+  current = tree
+
+  for tok in toks
+    if tok == OPEN_PAREN
+      stack.push current
+      current = []
+      tree.push current
+    else if tok == CLOSE_PAREN
+      current = stack.pop()
+    else
+      current.push tok
+
 
   #console.log tree
 
