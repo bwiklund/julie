@@ -71,8 +71,6 @@ parse = function(str) {
     return _results;
   };
   debride(tree);
-  console.log(toks);
-  console.log(JSON.stringify(tree, null, 2));
   return tree;
 };
 
@@ -84,10 +82,21 @@ DEF = function(name, fn) {
   return defs[name] = fn;
 };
 
-DEF("def", function() {});
-
-DEF("root", function() {
-  return console.log(arguments);
+DEF("def", function(fnName, args, fn) {
+  var argNames;
+  argNames = args.branches.map(function(b) {
+    return b.str;
+  });
+  console.log(argNames);
+  return DEF(fnName.str, function() {
+    var i, v, _i, _len;
+    args = {};
+    for (i = _i = 0, _len = arguments.length; _i < _len; i = ++_i) {
+      v = arguments[i];
+      args[argNames[i]] = parseFloat(v.str);
+    }
+    return console.log(args);
+  });
 });
 
 functions = {
@@ -102,10 +111,7 @@ run = function(p) {
   for (_i = 0, _len = _ref.length; _i < _len; _i++) {
     branch = _ref[_i];
     fn = branch.branches[0];
-    console.log("fn:", fn.str);
-    _results.push(defs[fn.str].call({}, branch.branches.slice(1).map(function(b) {
-      return b.str;
-    })));
+    _results.push(defs[fn.str].apply({}, branch.branches.slice(1)));
   }
   return _results;
 };

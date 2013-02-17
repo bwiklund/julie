@@ -59,7 +59,7 @@ parse = (str) ->
   debride = (b) -> delete b.parent; debride c for c in b.branches
   debride tree
 
-  console.log toks
+  #console.log tree
 
   console.log JSON.stringify tree, null, 2
 
@@ -76,10 +76,18 @@ defs = {}
 DEF = (name,fn) -> defs[name] = fn
 
 
-DEF "def", ->
+DEF "def", (fnName,args,fn) ->
+  argNames = args.branches.map (b) -> b.str
+  console.log argNames
+
+  DEF fnName.str, ->
+    args = {}
+    for v,i in arguments
+      args[argNames[i]] = parseFloat v.str
+    console.log args
 
 
-DEF "root", -> console.log arguments
+
 
 
 functions =
@@ -90,8 +98,7 @@ functions =
 run = (p) ->
   for branch in p.branches
     fn = branch.branches[0]
-    console.log "fn:", fn.str
-    defs[fn.str].call {}, branch.branches[1..].map (b) -> b.str
+    defs[fn.str].apply {}, branch.branches[1..]
 
 
 
