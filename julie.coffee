@@ -30,8 +30,6 @@ parse = (str) ->
       current.push tok
 
 
-  #console.log tree
-
   console.log JSON.stringify tree, null, 2
 
   tree[0]
@@ -49,7 +47,11 @@ parse = (str) ->
 evalle = (exp,env={}) ->
   switch exp[0]
     when "begin"
-      console.log "mos def"
+      for e in exp[1..]
+        ret = evalle e
+      return ret
+    else
+      "foo"
 
 
 
