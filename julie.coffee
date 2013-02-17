@@ -51,10 +51,16 @@ parse = (str) ->
 
 evalle = (exp,env={}) ->
   switch exp[0]
+
     when "begin"
-      for e in exp[1..]
-        ret = evalle e
+      for _exp in exp[1..]
+        ret = evalle _exp, env
       return ret
+
+    when "def"
+      [_,_var,_exp] = exp
+      env[_var] = evalle _exp, env
+
     else
       "foo"
 
@@ -72,5 +78,8 @@ evalle = (exp,env={}) ->
 program = parse src
 console.log JSON.stringify program, null, 2
 
-console.log evalle program
+env = {}
+console.log evalle program, env
+
+console.log env
 
