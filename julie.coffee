@@ -1,7 +1,14 @@
+# src = """
+# ( begin 
+#   ( def foo ( x ) ( + x 5 ) )
+#   ( foo 4 )
+# )
+#"""
+
 src = """
 ( begin 
-  ( def foo ( x ) ( + x 5 ) )
-  ( foo 4 )
+  ( def r 5 )
+  ( + r 5 )
 )
 """
 
