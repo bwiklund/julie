@@ -1,6 +1,8 @@
 src = """
-( def foo ( x ) ( + x 5 ) )
-( foo 4 )
+( begin 
+  ( def foo ( x ) ( + x 5 ) )
+  ( foo 4 )
+)
 """
 
 
@@ -32,7 +34,7 @@ parse = (str) ->
 
   console.log JSON.stringify tree, null, 2
 
-  tree
+  tree[0]
 
 
 
@@ -45,7 +47,9 @@ parse = (str) ->
 
 
 evalle = (exp,env={}) ->
-
+  switch exp[0]
+    when "begin"
+      console.log "mos def"
 
 
 
