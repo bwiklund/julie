@@ -32,32 +32,28 @@ OPEN_PAREN = "("
 CLOSE_PAREN = ")"
 
 
-
-class Node
-  constructor: (@str, @parent) ->
-    @branches = []
-
-
 parse = (str) ->
 
   toks = src.split /[\s\n]+/
 
-  tree = new Node("root",null)
-  current_branch = tree
+  # tree = new Node("root",null)
+  # current_branch = tree
 
-  for tok in toks
-    switch tok
-      when OPEN_PAREN 
-        branch = new Node tok, current_branch
-        current_branch.branches.push branch
-        current_branch = branch
-      when CLOSE_PAREN
-        current_branch = current_branch.parent
-      else
-        current_branch.branches.push new Node tok, current_branch
+  # for tok in toks
+  #   switch tok
+  #     when OPEN_PAREN 
+  #       branch = new Node tok, current_branch
+  #       current_branch.branches.push branch
+  #       current_branch = branch
+  #     when CLOSE_PAREN
+  #       current_branch = current_branch.parent
+  #     else
+  #       current_branch.branches.push new Node tok, current_branch
 
-  debride = (b) -> delete b.parent; debride c for c in b.branches
-  debride tree
+  # debride = (b) -> delete b.parent; debride c for c in b.branches
+  # debride tree
+
+  tree = toks
 
   #console.log tree
 
