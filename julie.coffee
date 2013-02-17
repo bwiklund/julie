@@ -44,6 +44,7 @@ parse = (str) ->
 
 
 
+evalle = (exp,env={}) ->
 
 
 
@@ -56,51 +57,7 @@ parse = (str) ->
 
 
 
-
-
-
-
-
-
-
-
-
-###
 
 program = parse src
+eval program
 
-
-defs = {}
-DEF = (name,fn) -> defs[name] = fn
-
-
-DEF "def", (fnName,args,fn) ->
-  argNames = args.branches.map (b) -> b.str
-  console.log argNames
-
-  DEF fnName.str, ->
-    args = {}
-    for v,i in arguments
-      args[argNames[i]] = parseFloat v.str
-    console.log args
-
-
-
-
-
-functions =
-  root: ->
-  def:  ->
-
-
-run = (p) ->
-  for branch in p.branches
-    fn = branch.branches[0]
-    defs[fn.str].apply {}, branch.branches[1..]
-
-
-
-
-
-
-run program
