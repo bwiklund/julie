@@ -22,15 +22,13 @@ parse = (str) ->
   for tok in toks
     if tok == OPEN_PAREN
       stack.push current
+      parent = current
       current = []
-      tree.push current
+      parent.push current
     else if tok == CLOSE_PAREN
       current = stack.pop()
     else
       current.push tok
-
-
-  console.log JSON.stringify tree, null, 2
 
   tree[0]
 
@@ -65,5 +63,7 @@ evalle = (exp,env={}) ->
 
 
 program = parse src
-evalle program
+console.log JSON.stringify program, null, 2
+
+console.log evalle program
 
