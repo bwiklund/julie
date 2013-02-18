@@ -94,7 +94,7 @@ funtionSrc = """
 
 
 
-src = primeSrc
+src = funtionSrc
 
 
 OPEN_PAREN = "("
@@ -145,8 +145,19 @@ adlib "def", (exp,env) ->
   env[_var] = evalle _exp, env
 
 adlib "fun", (exp,env) ->
-  [_,name,args,_exp] = exp
-  console.log exp
+  [_,name,argnames,_exp] = exp
+
+  adlib name, (exp,env) ->
+    fn_args = exp[1..]
+
+    # evaluate the arguments and put them into the global (wrong) scope
+    for i in [0...argnames.length]
+      env[ argnames[i] ] = evalle fn_args[i], env
+      #console.log argnames[i], evalle fn_args[i], env
+    #for i in [0...argnames.length]
+    #  env[argnames[i]]=argvs[i]
+    return evalle _exp, env
+
   return undefined
 
 adlib "if", (exp,env) ->
