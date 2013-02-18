@@ -14,6 +14,7 @@
   "license": "BSD",
   "gitHead": "b6290f29ba9ec0de22dfe8bbbaaf2ef7add9b84e",
   "dependencies": {
-    "mocha": "~1.8.1"
+    "mocha": "~1.8.1",
+    "coffee-script": "~1.4.0"
   }
 }
