@@ -16,7 +16,7 @@ suite "something", ->
 
 
   test "primes", -> # do more actual tests here
-    assert.equal 100, julie """
+    assert.equal 97, julie("""
       ( begin 
         ( def i 3 )
         ( def results [] )
@@ -46,4 +46,4 @@ suite "something", ->
         )
         ( results )
       )
-      """
+      """)[23]

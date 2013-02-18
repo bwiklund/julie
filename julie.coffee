@@ -105,7 +105,6 @@ julieInstance = (src) ->
 
   adlib "def", (exp,env) ->
     [_,_var,_exp] = exp
-    console.log _var, evalle(_exp, env)
     env[_var] = evalle _exp, env
 
   adlib "fun", (exp,env) ->
