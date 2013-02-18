@@ -149,3 +149,9 @@ suite "whitespace sensitive dialect", ->
       """)[23]
 
 
+  test "ignore trailing whitespace", ->
+    assert.equal 10, runWhitespace """
+      begin
+        + 5 5 """
+
+

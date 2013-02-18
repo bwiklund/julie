@@ -76,7 +76,7 @@ module.exports.parseWhitespace = (str) ->
 
 
     # no matter what we just did, the current node gets some expressions
-    current.push tok for tok in (" "+line).split(/\s+/)[1..]
+    current.push tok for tok in (" "+line+" ").split(/\s+/)[1...-1]
 
 
   stack.pop()
