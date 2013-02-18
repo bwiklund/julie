@@ -30,7 +30,12 @@ primeSrc = """
   ( def i 3 )
   ( while ( < i 20 ) 
     ( begin
-      ( puts i )
+      ( def d 2 )
+      ( while ( < d i ) 
+        ( begin 
+          ( puts d )
+        )
+      )
       ( def i ( + i 1 ) )
     )
   )
