@@ -32,6 +32,10 @@ module.exports.parse = (str) ->
 begin
   + 1 2
 
+
+["begin",["foo",["bar",["+","1","2"]]],["baz","1","2"]]
+["begin",["foo",["bar",["+","1","2"]],"baz","1","2"]]
+
 ###
 
 module.exports.parseWhitespace = (str) ->
@@ -39,7 +43,7 @@ module.exports.parseWhitespace = (str) ->
   stack = []
   current = []
 
-  indentStack = [0]
+  indentStack = [-1]
 
   for line in str.split /\n/
     indent = line.match(/^\s*/)[0].length
@@ -50,21 +54,25 @@ module.exports.parseWhitespace = (str) ->
       current = []
       parent.push current
       indentStack.push indent
-    
-    while indent < indentStack[-1..][0]
-      indentStack.pop()
-      current = stack.pop()
-      console.log "unrolling"
-      console.log "stack at",current
+
+    else
+      # unwind stack
+      while indent < indentStack[-1..][0]
+        indentStack.pop()
+        current = stack.pop()
+        console.log "unrolling"
+        console.log "stack at", current
+
+
+      next = []
+      stack[-1..][0].push next
+      current = next
+
+
+
 
     # no matter what we just did, the current node gets some expressions
     current.push tok for tok in (" "+line).split(/\s+/)[1..]
-
-    #else if indent < lastIndent
-    #  current = stack.pop()
-    #  current.push tok for tok in (" "+line).split(/\s+/)[1..]
-    #else
-    #  current.push tok for tok in (" "+line).split(/\s+/)[1..]
 
 
   stack.pop()
