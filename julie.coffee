@@ -4,7 +4,7 @@ julieInstance = (src) ->
   OPEN_PAREN = "("
   CLOSE_PAREN = ")"
 
-
+  
   parse = (str) ->
 
     toks = str.split /[\s\n]+/
@@ -29,24 +29,19 @@ julieInstance = (src) ->
 
 
 
-
-
-  #parse = (str) ->
-
-
-
-
-  lib = require './lib/core'
+  
 
 
 
 
   class VM
+    constructor: ->
+      @lib = require './lib/core'
 
     evalle: (exp,env={}) =>
       tok = exp[0]
-      if lib[tok]?
-        return lib[tok].call(@,exp,env)
+      if @lib[tok]?
+        return @lib[tok].call(@,exp,env)
       else if exp == "[]"
         return []
       else # symbol or literal
