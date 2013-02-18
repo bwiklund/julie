@@ -31,10 +31,20 @@ primeSrc = """
   ( while ( < i 20 ) 
     ( begin
       ( def d 2 )
+      ( def isprime 1 )
       ( while ( < d i ) 
         ( begin 
-          ( puts d )
+          ( def remainder ( % i d ) )
+          ( if ( = 0 remainder )
+            ( def isprime 0 )
+            ( 0 )
+          )
+          ( def d ( + d 1 ) )
         )
+      )
+      ( if isprime 
+        ( puts i )
+        ( 0 )
       )
       ( def i ( + i 1 ) )
     )
@@ -114,6 +124,10 @@ evalle = (exp,env={}) ->
     when "<"
       [_,_exp_a,_exp_b] = exp
       return (evalle _exp_a, env ) < (evalle _exp_b, env )
+
+    when "%"
+      [_,_exp_a,_exp_b] = exp
+      return (evalle _exp_a, env ) % (evalle _exp_b, env )
 
     when "while"
       [_,_cond,_exp] = exp
