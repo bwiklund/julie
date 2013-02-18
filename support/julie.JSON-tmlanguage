@@ -1,0 +1,17 @@
+{ "name": "Julie",
+  "scopeName": "source.syntax_name",
+  "fileTypes": ["julie"],
+  "patterns": [
+    {
+      "match": "^\\s*(while|if|begin)\\b",
+      "name": "keyword.control.julie",
+      "comment": "funcs"
+    },
+    {
+      "match": "^\\s*[^\\s]+",
+      "name": "entity.name.function.julie",
+      "comment": "funcs"
+    }
+  ],
+  "uuid": "637df828-20d4-45b3-8291-c946f7feda87"
+}

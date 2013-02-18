@@ -153,5 +153,3 @@ suite "whitespace sensitive dialect", ->
     assert.equal 10, runWhitespace """
       begin
         + 5 5 """
-
-
