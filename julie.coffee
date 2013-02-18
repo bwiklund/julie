@@ -1,3 +1,4 @@
+# take a julie program as a string, and parse it into a tree of expressions
 
 module.exports.parse = (str) ->
   OPEN_PAREN = "("
@@ -28,7 +29,7 @@ module.exports.parse = (str) ->
   
 
 
-
+# represents an instance of our simple vm, hooking our library up to our evaluator and environment
 
 class VM
 
