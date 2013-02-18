@@ -41,24 +41,29 @@ module.exports.parseWhitespace = (str) ->
   tree = []
   current = tree
 
-  lastIndent = 0
+  indentStack = [0]
 
   for line in str.split /\n/
     indent = line.match(/^\s*/)[0].length
     
-    if indent > lastIndent
+    while indent > indentStack[-1..][0]
       stack.push current
       parent = current
       current = []
       parent.push current
-      current.push tok for tok in (" "+line).split(/\s+/)[1..]
-    else if indent < lastIndent
-      current = stack.pop()
-      current.push tok for tok in (" "+line).split(/\s+/)[1..]
-    else
-      current.push tok for tok in (" "+line).split(/\s+/)[1..]
+      indentStack.push indent
 
-    lastIndent = indent
+    while indent < indentStack[-1..][0]
+      indentStack.pop()
+
+    # no matter what we just did, the current node gets some expressions
+    current.push tok for tok in (" "+line).split(/\s+/)[1..]
+
+    #else if indent < lastIndent
+    #  current = stack.pop()
+    #  current.push tok for tok in (" "+line).split(/\s+/)[1..]
+    #else
+    #  current.push tok for tok in (" "+line).split(/\s+/)[1..]
 
 
   tree
