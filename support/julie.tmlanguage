@@ -24,7 +24,7 @@
 			<key>match</key>
 			<string>^\s*(def)\b</string>
 			<key>name</key>
-			<string>variable.variable.julie</string>
+			<string>storage.type.julie</string>
 		</dict>
 		<dict>
 			<key>comment</key>
