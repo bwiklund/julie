@@ -23,12 +23,39 @@ allsrc = """
 )
 """
 
+allWhitespc = """
+begin
+  def r 5
+  def foo
+    + r 5
+  if 
+    = foo 11
+    puts 1
+    puts 2
+  def i 0
+  while
+    < i 5
+    begin
+      puts i
+      def i
+        + i 1
+"""
+
+###
+
+r = 5
+foo = -> r + 5
+puts if foo == 11 then 1 else 2
+puts i for i in [0...5]
+
+###
+
 
 
 primeSrc = """
 ( begin 
   ( def i 3 )
-  ( while ( < i 200000 ) 
+  ( while ( < i 100 ) 
     ( begin
       ( def d 2 )
       ( def isprime 1 )
@@ -53,6 +80,15 @@ primeSrc = """
     )
   )
   ( i )
+)
+"""
+
+
+
+funtionSrc = """
+( begin
+  ( fun foo ( x ) ( + x 5 ) )
+  ( puts ( foo 10 ) )
 )
 """
 
@@ -91,63 +127,77 @@ parse = (str) ->
 
 
 
+#parse = (str) ->
+
+
+
+
+lib = {}
+adlib = (name,fn) -> lib[name] = fn
+
+adlib "begin", (exp,env) ->
+  for _exp in exp[1..]
+    ret = evalle _exp, env
+  return ret
+
+adlib "def", (exp,env) ->
+  [_,_var,_exp] = exp
+  env[_var] = evalle _exp, env
+
+adlib "fun", (exp,env) ->
+  [_,name,args,_exp] = exp
+  console.log exp
+  return undefined
+
+adlib "if", (exp,env) ->
+  [_,_cond,_then,_else] = exp
+  if evalle _cond,env
+    return evalle _then, env
+  else 
+    return evalle _else, env
+
+adlib "+", (exp,env) ->
+  [_,_exps...] = exp
+  sum = 0
+  sum += evalle _exp, env for _exp in _exps
+  return sum
+
+adlib "=", (exp,env) ->
+  [_,_exp_a,_exp_b] = exp
+  return (evalle _exp_a, env ) == (evalle _exp_b, env )
+
+adlib "<", (exp,env) ->
+  [_,_exp_a,_exp_b] = exp
+  return (evalle _exp_a, env ) < (evalle _exp_b, env )
+
+adlib "%", (exp,env) ->
+  [_,_exp_a,_exp_b] = exp
+  return (evalle _exp_a, env ) % (evalle _exp_b, env )
+
+adlib "while", (exp,env) ->
+  [_,_cond,_exp] = exp
+  while evalle(_cond,env)
+    evalle _exp, env
+  return undefined
+
+adlib "puts", (exp,env) ->
+  [_,_exps...] = exp
+  console.log evalle _exp, env for _exp in _exps
 
 
 
 
 
 evalle = (exp,env={}) ->
-  switch exp[0]
-
-    when "begin"
-      for _exp in exp[1..]
-        ret = evalle _exp, env
-      return ret
-
-    when "def"
-      [_,_var,_exp] = exp
-      env[_var] = evalle _exp, env
-
-    when "if"
-      [_,_cond,_then,_else] = exp
-      if evalle _cond,env
-        return evalle _then, env
-      else 
-        return evalle _else, env
-
-    when "+"
-      [_,_exps...] = exp
-      sum = 0
-      sum += evalle _exp, env for _exp in _exps
-      return sum
-
-    when "="
-      [_,_exp_a,_exp_b] = exp
-      return (evalle _exp_a, env ) == (evalle _exp_b, env )
-
-    when "<"
-      [_,_exp_a,_exp_b] = exp
-      return (evalle _exp_a, env ) < (evalle _exp_b, env )
-
-    when "%"
-      [_,_exp_a,_exp_b] = exp
-      return (evalle _exp_a, env ) % (evalle _exp_b, env )
-
-    when "while"
-      [_,_cond,_exp] = exp
-      while evalle(_cond,env)
-        evalle _exp, env
-      return undefined
-
-    when "puts"
-      [_,_exps...] = exp
-      console.log evalle _exp, env for _exp in _exps
-
-    else # symbol or literal
-      if /^[A-Za-z]+$/.test exp
-        return env[exp]
-      else
-        return parseFloat exp
+  tok = exp[0]
+  if lib[tok]?
+    return lib[tok](exp,env)
+  else # symbol or literal
+    if /^[A-Za-z]+$/.test exp
+      throw new Error("#{exp} is undefined") if !env[exp]?
+      return env[exp]
+    else
+      return parseFloat exp
 
 
 
@@ -164,7 +214,7 @@ program = parse src
 console.log JSON.stringify program, null, 2
 
 env = {}
-console.log evalle program, env
+console.log "exit:", evalle program, env
 
-console.log "final env: ", env
+console.log "final env:", env
 

@@ -1,7 +1,7 @@
 primes = []
 for i in [3...200000]
   isprime = true
-  for d in [3...i]
+  for d in [2...i]
     if i%d == 0
       isprime = false
       break
