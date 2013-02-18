@@ -9,7 +9,7 @@ src = """
 ( begin 
   ( def r 5 )
   ( def foo ( + r 5 ) )
-  ( if (= foo 10) 
+  ( if ( = foo 11 ) 
     1
     2
   )
@@ -65,9 +65,9 @@ evalle = (exp,env={}) ->
       [_,_var,_exp] = exp
       env[_var] = evalle _exp, env
 
-    if "if"
-      [_,test,_then,_else]
-      if evalle test,env
+    when "if"
+      [_,_cond,_then,_else] = exp
+      if evalle _cond,env
         return evalle _then, env
       else 
         return evalle _else, env
@@ -77,6 +77,11 @@ evalle = (exp,env={}) ->
       sum = 0
       sum += evalle _exp, env for _exp in _exps
       return sum
+
+    when "="
+      [_,_exp_a,_exp_b] = exp
+      console.log "asdf"
+      return (evalle _exp_a, env ) == (evalle _exp_b, env )
 
     else # symbol or literal
       if /^[A-Za-z]+$/.test exp
