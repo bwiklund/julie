@@ -10,8 +10,8 @@ src = """
   ( def r 5 )
   ( def foo ( + r 5 ) )
   ( if ( = foo 11 ) 
-    1
-    2
+    ( puts 1 )
+    ( puts 2 )
   )
 )
 """
@@ -83,6 +83,15 @@ evalle = (exp,env={}) ->
       console.log "asdf"
       return (evalle _exp_a, env ) == (evalle _exp_b, env )
 
+    when "while"
+      [_,_cond,_exp] = exp
+      while evalle(_cond,env)
+        evalle _exp, env
+
+    when "puts"
+      [_,_exps...] = exp
+      console.log evalle _exp, env for _exp in _exps
+
     else # symbol or literal
       if /^[A-Za-z]+$/.test exp
         return env[exp]
@@ -106,5 +115,5 @@ console.log JSON.stringify program, null, 2
 env = {}
 console.log evalle program, env
 
-console.log env
+console.log "final env: ", env
 
