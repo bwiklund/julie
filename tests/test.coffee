@@ -107,7 +107,7 @@ suite "whitespace sensitive dialect", ->
       """
 
 
-  test "more complex indentation", ->
+  test "double unindent", ->
     assert.deepEqual ['begin',['foo',['bar',['+','1','2']]],['baz','1','2']], julie.parseWhitespace """
       begin
         foo
