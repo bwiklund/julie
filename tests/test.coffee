@@ -4,12 +4,27 @@ julie = require '../julie'
 
 
 suite "something", ->
-  
+
   test "function definition", ->
     assert.equal 15, julie """
       ( begin
         ( fun foo ( x ) ( + x 5 ) )
         ( foo 10 )
+      )
+      """
+
+  test "while", ->
+    assert.deepEqual [1,2,3,4,5], julie """
+      ( begin
+        ( def results [] )
+        ( def i 1 )
+        ( while ( < i 6 ) 
+          ( begin
+            ( push results i )
+            ( def i ( + i 1 ) )
+          )
+        )
+        ( results )
       )
       """
 
