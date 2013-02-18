@@ -8,6 +8,11 @@
       "comment": "funcs"
     },
     {
+      "match": "^\\s*(def)\\b",
+      "name": "storage.type.julie",
+      "comment": "funcs"
+    },
+    {
       "match": "^\\s*[^\\s]+",
       "name": "entity.name.function.julie",
       "comment": "funcs"
