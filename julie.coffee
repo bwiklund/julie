@@ -150,8 +150,8 @@ julieInstance = (src) ->
     return (evalle _exp_a, env ) % (evalle _exp_b, env )
 
   adlib "push", (exp,env) ->
-    [_,list,val] = exp
-    env[list].push val
+    [_,list,_exp] = exp
+    env[list].push evalle _exp, env
     return list
 
   adlib "while", (exp,env) ->
