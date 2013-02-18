@@ -29,12 +29,19 @@ module.exports.parse = (str) ->
 
 ###
 
+whitespace aware version of the parser. takes stuff like this:
+
 begin
   + 1 2
+  foo
+    bar
 
+and reads it as
 
-["begin",["foo",["bar",["+","1","2"]]],["baz","1","2"]]
-["begin",["foo",["bar",["+","1","2"]],"baz","1","2"]]
+( begin 
+  ( + 1 2 )
+  ( foo ( bar ) )
+)
 
 ###
 
@@ -60,7 +67,6 @@ module.exports.parseWhitespace = (str) ->
       while indent < indentStack[-1..][0]
         indentStack.pop()
         current = stack.pop()
-
 
       next = []
       stack[-1..][0].push next
