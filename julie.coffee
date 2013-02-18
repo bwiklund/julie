@@ -1,33 +1,3 @@
-# src = """
-# ( begin 
-#   ( def foo ( x ) ( + x 5 ) )
-#   ( foo 4 )
-# )
-#"""
-
-# allWhitespc = """
-# begin
-#   def r 5
-#   def foo
-#     + r 5
-#   if 
-#     = foo 11
-#     puts 1
-#     puts 2
-#   def i 0
-#   while
-#     < i 5
-#     begin
-#       puts i
-#       def i
-#         + i 1
-# """
-
-
-
-
-#src = funtionSrc
-
 
 julieInstance = (src) ->
 
