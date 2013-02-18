@@ -28,9 +28,41 @@ module.exports.parse = (str) ->
   tree[0]
 
 
+###
+
+begin
+  + 1 2
+
+###
 
 module.exports.parseWhitespace = (str) ->
-  ['begin',['+','1','2']]
+  #
+  stack = []
+  tree = []
+  current = tree
+
+  lastIndent = 0
+
+  for line in str.split /\n/
+    indent = line.match(/^\s*/)[0].length
+    
+    if indent > lastIndent
+      stack.push current
+      parent = current
+      current = []
+      parent.push current
+      current.push tok for tok in (" "+line).split(/\s+/)[1..]
+    else if indent < lastIndent
+      current = stack.pop()
+      current.push tok for tok in (" "+line).split(/\s+/)[1..]
+    else
+      current.push tok for tok in (" "+line).split(/\s+/)[1..]
+
+    lastIndent = indent
+
+
+  tree
+  #['begin',['+','1','2']]
   
 
 
