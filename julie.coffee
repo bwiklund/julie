@@ -5,7 +5,7 @@
 # )
 #"""
 
-src = """
+allsrc = """
 ( begin 
   ( def r 5 )
   ( def foo ( + r 5 ) )
@@ -13,9 +13,33 @@ src = """
     ( puts 1 )
     ( puts 2 )
   )
+  ( def i 0 )
+  ( while ( < i 5 ) 
+    ( begin
+      ( puts i )
+      ( def i ( + i 1 ) )
+    )
+  )
 )
 """
 
+
+
+primeSrc = """
+( begin 
+  ( def i 3 )
+  ( while ( < i 20 ) 
+    ( begin
+      ( puts i )
+      ( def i ( + i 1 ) )
+    )
+  )
+)
+"""
+
+
+
+src = primeSrc
 
 
 OPEN_PAREN = "("
@@ -80,13 +104,17 @@ evalle = (exp,env={}) ->
 
     when "="
       [_,_exp_a,_exp_b] = exp
-      console.log "asdf"
       return (evalle _exp_a, env ) == (evalle _exp_b, env )
+
+    when "<"
+      [_,_exp_a,_exp_b] = exp
+      return (evalle _exp_a, env ) < (evalle _exp_b, env )
 
     when "while"
       [_,_cond,_exp] = exp
       while evalle(_cond,env)
         evalle _exp, env
+      return undefined
 
     when "puts"
       [_,_exps...] = exp
