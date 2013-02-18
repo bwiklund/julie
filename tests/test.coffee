@@ -1,12 +1,17 @@
 assert = require 'assert'
 julie = require '../julie'
 
+run = (src) ->
+  program = julie.parse src
+  vm = julie.vm()
+  vm.evalle program
+
 
 suite "something", ->
 
 
   test "function definition", ->
-    assert.equal 15, julie """
+    assert.equal 15, run """
       ( begin
         ( fun foo ( x ) ( + x 5 ) )
         ( foo 10 )
@@ -15,13 +20,13 @@ suite "something", ->
 
 
   test "if", ->
-    assert.equal 1, julie """
+    assert.equal 1, run """
       ( if 1 
         1
         2
       )
       """
-    assert.equal 2, julie """
+    assert.equal 2, run """
       ( if 0 
         1
         2
@@ -30,7 +35,7 @@ suite "something", ->
 
 
   test "while", ->
-    assert.deepEqual [1,2,3,4,5], julie """
+    assert.deepEqual [1,2,3,4,5], run """
       ( begin
         ( def results [] )
         ( def i 1 )
@@ -49,7 +54,7 @@ suite "random e2e stuff", ->
 
 
   test "primes", -> # do more actual tests here
-    assert.equal 97, julie("""
+    assert.equal 97, run("""
       ( begin 
         ( def i 3 )
         ( def results [] )
