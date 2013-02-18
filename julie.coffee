@@ -30,7 +30,7 @@ module.exports.parse = (str) ->
 
 
 module.exports.parseWhitespace = (str) ->
-  ['+','1','2']
+  ['begin',['+','1','2']]
   
 
 

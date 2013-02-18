@@ -96,4 +96,7 @@ suite "random e2e stuff", ->
 suite "whitespace sensitive dialect", ->
 
   test "hello world", ->
-    assert.equal 3, runWhitespace("derp")
+    assert.deepEqual ['begin',['+','1','2']], julie.parseWhitespace """
+begin
+  + 1 2
+"""
