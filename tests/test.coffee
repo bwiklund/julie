@@ -1,6 +1,7 @@
 assert = require 'assert'
 julie = require '../julie'
 
+
 run = (src) ->
   program = julie.parse src
   vm = julie.vm()
@@ -93,10 +94,24 @@ suite "random e2e stuff", ->
       """)[23]
 
 
+
+
+
 suite "whitespace sensitive dialect", ->
+
 
   test "hello world", ->
     assert.deepEqual ['begin',['+','1','2']], julie.parseWhitespace """
-begin
-  + 1 2
-"""
+      begin
+        + 1 2
+      """
+
+
+  test "more complex indentation", ->
+    assert.deepEqual ['begin',['foo',['bar',['+','1','2']]],['baz','1','2']], julie.parseWhitespace """
+      begin
+        foo
+          bar
+            + 1 2
+        baz 1 2
+      """

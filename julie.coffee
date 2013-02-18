@@ -11,8 +11,7 @@ module.exports.parse = (str) ->
   toks = str.split /[\s\n]+/
 
   stack = []
-  tree = []
-  current = tree
+  current = []
 
   for tok in toks
     if tok == OPEN_PAREN
@@ -25,7 +24,7 @@ module.exports.parse = (str) ->
     else
       current.push tok
 
-  tree[0]
+  current[0]
 
 
 ###
@@ -38,23 +37,25 @@ begin
 module.exports.parseWhitespace = (str) ->
   #
   stack = []
-  tree = []
-  current = tree
+  current = []
 
   indentStack = [0]
 
   for line in str.split /\n/
     indent = line.match(/^\s*/)[0].length
     
-    while indent > indentStack[-1..][0]
+    if indent > indentStack[-1..][0]
       stack.push current
       parent = current
       current = []
       parent.push current
       indentStack.push indent
-
+    
     while indent < indentStack[-1..][0]
       indentStack.pop()
+      current = stack.pop()
+      console.log "unrolling"
+      console.log "stack at",current
 
     # no matter what we just did, the current node gets some expressions
     current.push tok for tok in (" "+line).split(/\s+/)[1..]
@@ -66,7 +67,7 @@ module.exports.parseWhitespace = (str) ->
     #  current.push tok for tok in (" "+line).split(/\s+/)[1..]
 
 
-  tree
+  stack.pop()
   #['begin',['+','1','2']]
   
 
