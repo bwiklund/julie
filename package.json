@@ -1,0 +1,19 @@
+{
+  "name": "julie",
+  "version": "0.0.0",
+  "description": "ERROR: No README.md file found!",
+  "main": "index.js",
+  "directories": {
+    "test": "tests"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": "",
+  "author": "",
+  "license": "BSD",
+  "gitHead": "b6290f29ba9ec0de22dfe8bbbaaf2ef7add9b84e",
+  "dependencies": {
+    "mocha": "~1.8.1"
+  }
+}
