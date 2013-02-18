@@ -17,7 +17,7 @@ module.exports =
   "fun": (exp,env) ->
     [_,name,argnames,fn_exp] = exp
 
-    name: (exp,env) ->
+    @lib[name] = (exp,env) ->
       fn_args = exp[1..]
       # evaluate the arguments and put them into the global (wrong) scope
       for i in [0...argnames.length]
