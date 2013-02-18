@@ -5,41 +5,41 @@
 # )
 #"""
 
-allsrc = """
-( begin 
-  ( def r 5 )
-  ( def foo ( + r 5 ) )
-  ( if ( = foo 11 ) 
-    ( puts 1 )
-    ( puts 2 )
-  )
-  ( def i 0 )
-  ( while ( < i 5 ) 
-    ( begin
-      ( puts i )
-      ( def i ( + i 1 ) )
-    )
-  )
-)
-"""
+# allsrc = """
+# ( begin 
+#   ( def r 5 )
+#   ( def foo ( + r 5 ) )
+#   ( if ( = foo 11 ) 
+#     ( puts 1 )
+#     ( puts 2 )
+#   )
+#   ( def i 0 )
+#   ( while ( < i 5 ) 
+#     ( begin
+#       ( puts i )
+#       ( def i ( + i 1 ) )
+#     )
+#   )
+# )
+# """
 
-allWhitespc = """
-begin
-  def r 5
-  def foo
-    + r 5
-  if 
-    = foo 11
-    puts 1
-    puts 2
-  def i 0
-  while
-    < i 5
-    begin
-      puts i
-      def i
-        + i 1
-"""
+# allWhitespc = """
+# begin
+#   def r 5
+#   def foo
+#     + r 5
+#   if 
+#     = foo 11
+#     puts 1
+#     puts 2
+#   def i 0
+#   while
+#     < i 5
+#     begin
+#       puts i
+#       def i
+#         + i 1
+# """
 
 ###
 
@@ -52,49 +52,49 @@ puts i for i in [0...5]
 
 
 
-primeSrc = """
-( begin 
-  ( def i 3 )
-  ( while ( < i 100 ) 
-    ( begin
-      ( def d 2 )
-      ( def isprime 1 )
-      ( while ( < d i ) 
-        ( begin 
-          ( def remainder ( % i d ) )
-          ( if ( = 0 remainder )
-            ( begin
-              ( def isprime 0 )
-              ( def d i )
-            )
-            ( 0 )
-          )
-          ( def d ( + d 1 ) )
-        )
-      )
-      ( if isprime 
-        ( puts i )
-        ( 0 )
-      )
-      ( def i ( + i 1 ) )
-    )
-  )
-  ( i )
-)
-"""
+# primeSrc = """
+# ( begin 
+#   ( def i 3 )
+#   ( while ( < i 100 ) 
+#     ( begin
+#       ( def d 2 )
+#       ( def isprime 1 )
+#       ( while ( < d i ) 
+#         ( begin 
+#           ( def remainder ( % i d ) )
+#           ( if ( = 0 remainder )
+#             ( begin
+#               ( def isprime 0 )
+#               ( def d i )
+#             )
+#             ( 0 )
+#           )
+#           ( def d ( + d 1 ) )
+#         )
+#       )
+#       ( if isprime 
+#         ( puts i )
+#         ( 0 )
+#       )
+#       ( def i ( + i 1 ) )
+#     )
+#   )
+#   ( i )
+# )
+# """
 
 
 
-funtionSrc = """
-( begin
-  ( fun foo ( x ) ( + x 5 ) )
-  ( puts ( foo 10 ) )
-)
-"""
+# funtionSrc = """
+# ( begin
+#   ( fun foo ( x ) ( + x 5 ) )
+#   ( puts ( foo 10 ) )
+# )
+# """
 
 
 
-src = funtionSrc
+#src = funtionSrc
 
 
 OPEN_PAREN = "("
@@ -103,7 +103,7 @@ CLOSE_PAREN = ")"
 
 parse = (str) ->
 
-  toks = src.split /[\s\n]+/
+  toks = str.split /[\s\n]+/
 
   stack = []
   tree = []
@@ -219,13 +219,16 @@ evalle = (exp,env={}) ->
 
 
 
+module.exports = (src) ->
 
+  program = parse src
+  console.log JSON.stringify program, null, 2
 
-program = parse src
-console.log JSON.stringify program, null, 2
+  env = {}
+  exit = evalle program, env
+  console.log "exit:", exit
 
-env = {}
-console.log "exit:", evalle program, env
+  console.log "final env:", env
 
-console.log "final env:", env
+  exit
 
