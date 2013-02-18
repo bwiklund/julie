@@ -115,3 +115,37 @@ suite "whitespace sensitive dialect", ->
             + 1 2
         baz 1 2
       """
+
+
+  test "prime", ->
+    assert.equal 97, runWhitespace("""
+      begin
+        def i 3
+        def results []
+        while
+          < i 100
+          begin
+            def d 2
+            def isprime 1
+            while
+              < d i
+              begin
+                def remainder
+                  % i d
+                if
+                  = 0 remainder
+                  begin
+                    def isprime 0
+                    def d i
+                  0
+                def d
+                  + d 1
+            if isprime
+              push results i
+              0
+            def i
+              + i 1
+        results
+      """)[23]
+
+
