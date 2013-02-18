@@ -50,6 +50,8 @@ class VM
         return parseFloat exp
 
 
+
+
 module.exports.vm = -> new VM
 
 
