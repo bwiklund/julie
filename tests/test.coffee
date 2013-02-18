@@ -19,6 +19,7 @@ suite "something", ->
     assert.equal 100, julie """
       ( begin 
         ( def i 3 )
+        ( def results [] )
         ( while ( < i 100 ) 
           ( begin
             ( def d 2 )
@@ -37,12 +38,12 @@ suite "something", ->
               )
             )
             ( if isprime 
-              ( puts i )
+              ( push results i )
               ( 0 )
             )
             ( def i ( + i 1 ) )
           )
         )
-        ( i )
+        ( results )
       )
       """

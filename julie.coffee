@@ -105,6 +105,7 @@ julieInstance = (src) ->
 
   adlib "def", (exp,env) ->
     [_,_var,_exp] = exp
+    console.log _var, evalle(_exp, env)
     env[_var] = evalle _exp, env
 
   adlib "fun", (exp,env) ->
@@ -148,6 +149,11 @@ julieInstance = (src) ->
     [_,_exp_a,_exp_b] = exp
     return (evalle _exp_a, env ) % (evalle _exp_b, env )
 
+  adlib "push", (exp,env) ->
+    [_,list,val] = exp
+    env[list].push val
+    return list
+
   adlib "while", (exp,env) ->
     [_,_cond,_exp] = exp
     while evalle(_cond,env)
@@ -166,6 +172,8 @@ julieInstance = (src) ->
     tok = exp[0]
     if lib[tok]?
       return lib[tok](exp,env)
+    else if exp == "[]"
+      return []
     else # symbol or literal
       if /^[A-Za-z]+$/.test exp
         throw new Error("#{exp} is undefined") if !env[exp]?
