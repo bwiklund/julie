@@ -61,8 +61,17 @@ evalle = (exp,env={}) ->
       [_,_var,_exp] = exp
       env[_var] = evalle _exp, env
 
-    else
-      "foo"
+    when "+"
+      [_,_exps...] = exp
+      sum = 0
+      sum += evalle _exp, env for _exp in _exps
+      return sum
+
+    else # symbol or literal
+      if /^[A-Za-z]+$/.test exp
+        return env[exp]
+      else
+        return parseFloat exp
 
 
 
