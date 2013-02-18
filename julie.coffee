@@ -60,8 +60,6 @@ module.exports.parseWhitespace = (str) ->
       while indent < indentStack[-1..][0]
         indentStack.pop()
         current = stack.pop()
-        console.log "unrolling"
-        console.log "stack at", current
 
 
       next = []
