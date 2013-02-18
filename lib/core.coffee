@@ -1,3 +1,5 @@
+# all logic is run in the scope of the VM, making @evalle available
+
 lib = {}
 
 adlib = (name,fn) -> lib[name] = fn
