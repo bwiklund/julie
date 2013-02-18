@@ -8,7 +8,11 @@
 src = """
 ( begin 
   ( def r 5 )
-  ( + r 5 )
+  ( def foo ( + r 5 ) )
+  ( if (= foo 10) 
+    1
+    2
+  )
 )
 """
 
@@ -60,6 +64,13 @@ evalle = (exp,env={}) ->
     when "def"
       [_,_var,_exp] = exp
       env[_var] = evalle _exp, env
+
+    if "if"
+      [_,test,_then,_else]
+      if evalle test,env
+        return evalle _then, env
+      else 
+        return evalle _else, env
 
     when "+"
       [_,_exps...] = exp
