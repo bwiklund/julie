@@ -21,9 +21,6 @@ suite "something", ->
         2
       )
       """
-
-
-  test "if", ->
     assert.equal 2, julie """
       ( if 0 
         1
