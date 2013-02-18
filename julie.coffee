@@ -52,45 +52,6 @@ puts i for i in [0...5]
 
 
 
-# primeSrc = """
-# ( begin 
-#   ( def i 3 )
-#   ( while ( < i 100 ) 
-#     ( begin
-#       ( def d 2 )
-#       ( def isprime 1 )
-#       ( while ( < d i ) 
-#         ( begin 
-#           ( def remainder ( % i d ) )
-#           ( if ( = 0 remainder )
-#             ( begin
-#               ( def isprime 0 )
-#               ( def d i )
-#             )
-#             ( 0 )
-#           )
-#           ( def d ( + d 1 ) )
-#         )
-#       )
-#       ( if isprime 
-#         ( puts i )
-#         ( 0 )
-#       )
-#       ( def i ( + i 1 ) )
-#     )
-#   )
-#   ( i )
-# )
-# """
-
-
-
-# funtionSrc = """
-# ( begin
-#   ( fun foo ( x ) ( + x 5 ) )
-#   ( puts ( foo 10 ) )
-# )
-# """
 
 
 
@@ -214,6 +175,7 @@ julieInstance = (src) ->
 
 
   program = parse src
+
   evalle program
 
 
