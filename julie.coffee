@@ -28,7 +28,7 @@ allsrc = """
 primeSrc = """
 ( begin 
   ( def i 3 )
-  ( while ( < i 20000 ) 
+  ( while ( < i 200000 ) 
     ( begin
       ( def d 2 )
       ( def isprime 1 )
@@ -36,8 +36,10 @@ primeSrc = """
         ( begin 
           ( def remainder ( % i d ) )
           ( if ( = 0 remainder )
-            ( def isprime 0 )
-            ( def d i )
+            ( begin
+              ( def isprime 0 )
+              ( def d i )
+            )
             ( 0 )
           )
           ( def d ( + d 1 ) )
@@ -50,6 +52,7 @@ primeSrc = """
       ( def i ( + i 1 ) )
     )
   )
+  ( i )
 )
 """
 
