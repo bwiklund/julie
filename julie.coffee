@@ -145,7 +145,7 @@ adlib "def", (exp,env) ->
   env[_var] = evalle _exp, env
 
 adlib "fun", (exp,env) ->
-  [_,name,argnames,_exp] = exp
+  [_,name,argnames,fn_exp] = exp
 
   adlib name, (exp,env) ->
     fn_args = exp[1..]
@@ -156,7 +156,7 @@ adlib "fun", (exp,env) ->
       #console.log argnames[i], evalle fn_args[i], env
     #for i in [0...argnames.length]
     #  env[argnames[i]]=argvs[i]
-    return evalle _exp, env
+    return evalle fn_exp, env
 
   return undefined
 
