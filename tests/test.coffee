@@ -15,6 +15,8 @@ suite "something", ->
       """
 
 
+suite "random e2e stuff", ->
+
   test "primes", -> # do more actual tests here
     assert.equal 97, julie("""
       ( begin 
