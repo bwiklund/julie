@@ -215,20 +215,16 @@ evalle = (exp,env={}) ->
 
 
 
-
-
-
-
 module.exports = (src) ->
 
   program = parse src
-  console.log JSON.stringify program, null, 2
+  #console.log JSON.stringify program, null, 2
 
   env = {}
   exit = evalle program, env
-  console.log "exit:", exit
+  #console.log "exit:", exit
 
-  console.log "final env:", env
+  #console.log "final env:", env
 
   exit
 
