@@ -28,7 +28,7 @@ allsrc = """
 primeSrc = """
 ( begin 
   ( def i 3 )
-  ( while ( < i 20 ) 
+  ( while ( < i 200 ) 
     ( begin
       ( def d 2 )
       ( def isprime 1 )
