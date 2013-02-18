@@ -5,24 +5,6 @@
 # )
 #"""
 
-# allsrc = """
-# ( begin 
-#   ( def r 5 )
-#   ( def foo ( + r 5 ) )
-#   ( if ( = foo 11 ) 
-#     ( puts 1 )
-#     ( puts 2 )
-#   )
-#   ( def i 0 )
-#   ( while ( < i 5 ) 
-#     ( begin
-#       ( puts i )
-#       ( def i ( + i 1 ) )
-#     )
-#   )
-# )
-# """
-
 # allWhitespc = """
 # begin
 #   def r 5
@@ -40,17 +22,6 @@
 #       def i
 #         + i 1
 # """
-
-###
-
-r = 5
-foo = -> r + 5
-puts if foo == 11 then 1 else 2
-puts i for i in [0...5]
-
-###
-
-
 
 
 

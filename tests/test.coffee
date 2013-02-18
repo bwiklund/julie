@@ -1,9 +1,9 @@
 assert = require 'assert'
-
 julie = require '../julie'
 
 
 suite "something", ->
+
 
   test "function definition", ->
     assert.equal 15, julie """
@@ -12,6 +12,25 @@ suite "something", ->
         ( foo 10 )
       )
       """
+
+
+  test "if", ->
+    assert.equal 1, julie """
+      ( if 1 
+        1
+        2
+      )
+      """
+
+
+  test "if", ->
+    assert.equal 2, julie """
+      ( if 0 
+        1
+        2
+      )
+      """
+
 
   test "while", ->
     assert.deepEqual [1,2,3,4,5], julie """
@@ -30,6 +49,7 @@ suite "something", ->
 
 
 suite "random e2e stuff", ->
+
 
   test "primes", -> # do more actual tests here
     assert.equal 97, julie("""
