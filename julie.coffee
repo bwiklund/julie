@@ -29,7 +29,8 @@ module.exports.parse = (str) ->
 
 
 
-
+module.exports.parseWhitespace = (str) ->
+  ['+','1','2']
   
 
 

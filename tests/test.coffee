@@ -7,6 +7,12 @@ run = (src) ->
   vm.evalle program
 
 
+runWhitespace = (src) ->
+  program = julie.parseWhitespace src
+  vm = julie.vm()
+  vm.evalle program
+
+
 suite "something", ->
 
 
@@ -87,3 +93,7 @@ suite "random e2e stuff", ->
       """)[23]
 
 
+suite "whitespace sensitive dialect", ->
+
+  test "hello world", ->
+    assert.equal 3, runWhitespace("derp")
