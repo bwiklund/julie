@@ -149,6 +149,27 @@ suite "whitespace sensitive dialect", ->
       """)[23]
 
 
+  test "fibonacci", ->
+    assert.deepEqual [1,1,2,3,5,8,13,21,34,55], runWhitespace """
+    begin
+      def a 1
+      def b 1
+      def results []
+      push results a
+      push results b
+      while
+        < b 55
+        begin
+          def c
+            + a b
+          def a b
+          def b c
+          push results c
+      results
+    """
+
+
+
   test "ignore trailing whitespace", ->
     assert.equal 10, runWhitespace """
       begin
