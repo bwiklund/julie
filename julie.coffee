@@ -54,6 +54,10 @@ module.exports.parseWhitespace = (str) ->
 
   for line in str.split /\n/
     indent = line.match(/^\s*/)[0].length
+
+    # ignore empty lines
+    if /^\s*$/.test line
+      continue
     
     if indent > indentStack[-1..][0]
       stack.push current
@@ -107,7 +111,19 @@ class VM
 
 
 
+
 module.exports.vm = -> new VM
 
 
 
+
+
+
+
+
+
+
+
+
+toJs = (program) ->
+  console.log program

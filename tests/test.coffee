@@ -1,3 +1,5 @@
+# coffeescript -> js -> node v8 -> julie src -> julie vm
+
 assert = require 'assert'
 julie = require '../julie'
 
@@ -151,26 +153,52 @@ suite "whitespace sensitive dialect", ->
 
   test "fibonacci", ->
     assert.deepEqual [1,1,2,3,5,8,13,21,34,55], runWhitespace """
-    begin
-      def a 1
-      def b 1
-      def results []
-      push results a
-      push results b
-      while
-        < b 55
-        begin
-          def c
-            + a b
-          def a b
-          def b c
-          push results c
-      results
+      begin
+        def a 1
+        def b 1
+        def results []
+        push results a
+        push results b
+        while
+          < b 55
+          begin
+            def c
+              + a b
+            def a b
+            def b c
+            push results c
+        results
     """
-
 
 
   test "ignore trailing whitespace", ->
     assert.equal 10, runWhitespace """
       begin
         + 5 5 """
+
+
+  test "ignore various types of empty lines lines", ->
+    assert.equal 10, runWhitespace """
+      begin
+        def f 10
+
+        f
+      """
+    assert.equal 10, runWhitespace """
+      begin
+        def f 10
+  
+        f
+      """
+    assert.equal 10, runWhitespace """
+      begin
+        def f 10
+        
+        f
+      """
+    assert.equal 10, runWhitespace """
+      begin
+        def f 10
+          
+        f
+      """
