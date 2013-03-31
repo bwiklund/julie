@@ -151,6 +151,47 @@ suite "whitespace sensitive dialect", ->
       """)[23]
 
 
+  test "nicerprime", ->
+    assert.equal 97, runWhitespace("""
+      begin
+
+        def results []
+
+        fun testPrime
+          n
+          begin
+            def denom 2
+            def isPrime 1
+            while
+              < denom n
+              begin
+                def remainder
+                  % n denom
+                if
+                  = 0 remainder
+                  begin
+                    def isPrime 0
+                    def denom n
+                  0
+                def denom
+                  + denom 1
+            isPrime
+
+        def i 3
+        while
+          < i 100
+          begin
+            if
+              testPrime i
+              push results i
+              0
+            def i
+              + i 1
+        results
+
+      """)[23]
+
+
   test "fibonacci", ->
     assert.deepEqual [1,1,2,3,5,8,13,21,34,55], runWhitespace """
       begin

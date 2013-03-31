@@ -1,6 +1,6 @@
 # all logic is run in the scope of the VM, making @evalle available
 
-module.exports =
+keywords =
 
 
   "begin": (exp,env) ->
@@ -74,3 +74,12 @@ module.exports =
     [_,_exps...] = exp
     console.log @evalle _exp, env for _exp in _exps
 
+
+alias = (a,b) -> keywords[b] = keywords[a]
+
+alias 'fn', '->'
+alias 'def','d'
+
+module.exports = keywords
+
+module.exports = keywords
