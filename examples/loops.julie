@@ -1,0 +1,6 @@
+begin
+  def i 0
+  puts i
+  def i
+    + i 1
+  puts i
