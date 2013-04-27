@@ -78,8 +78,6 @@ keywords =
 alias = (a,b) -> keywords[b] = keywords[a]
 
 alias 'fn', '->'
-alias 'def','d'
-
-module.exports = keywords
+alias 'def','@'
 
 module.exports = keywords

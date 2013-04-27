@@ -1,0 +1,24 @@
+#!/usr/bin/env coffee
+
+julie = require './julie.coffee'
+fs = require 'fs'
+
+
+path = process.argv[2]
+if !path? then process.exit()
+
+
+run = (src) ->
+  program = julie.parse src
+  vm = julie.vm()
+  vm.evalle program
+
+
+runWhitespace = (src) ->
+  program = julie.parseWhitespace src
+  vm = julie.vm()
+  vm.evalle program
+
+
+txt = fs.readFileSync(path).toString()
+runWhitespace txt

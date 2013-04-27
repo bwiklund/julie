@@ -1,0 +1,45 @@
+begin
+
+
+  fun testPrime
+    x
+    begin
+      def denom 2
+      def isPrime 1
+      while
+        < denom x
+        begin
+          def remainder
+            % x denom
+          if
+            = 0 remainder
+            begin
+              def isPrime 0
+              def denom x
+            0
+          def denom
+            + denom 1
+      isPrime
+
+  
+  fun generatePrimes
+    num
+    begin
+      def results []
+      def i 3
+      while
+        < i num
+        begin
+          if
+            testPrime i
+            push results i
+            0
+          def i
+            + i 1
+      puts results
+
+
+  generatePrimes 100
+  
+  
+  

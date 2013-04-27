@@ -1,5 +1,3 @@
-#!/usr/bin/env coffee
-
 # take a julie program as a string, and parse it into a tree of expressions
 #
 # "( foo ( a b ) ( baz ( + 1 2 ) ) )"
@@ -111,6 +109,3 @@ module.exports.vm = -> new VM
 
 toJs = (program) ->
   console.log program
-
-
-console.log process.argv
