@@ -76,15 +76,11 @@ module.exports.parseWhitespace = (str) ->
       stack[-1..][0].push next
       current = next
 
-
-
-
     # no matter what we just did, the current node gets some expressions
     current.push tok for tok in (" "+line+" ").split(/\s+/)[1...-1]
 
 
   stack.pop()
-  #['begin',['+','1','2']]
   
 
 
@@ -108,21 +104,7 @@ class VM
       else
         return parseFloat exp
 
-
-
-
-
 module.exports.vm = -> new VM
-
-
-
-
-
-
-
-
-
-
 
 
 toJs = (program) ->
